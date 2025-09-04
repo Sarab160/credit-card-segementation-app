@@ -9,9 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
-# -------------------------------
-# Load Data
-# -------------------------------
+
 df = pd.read_csv("CC GENERAL.csv")
 
 x = df.iloc[:, 1:]
@@ -85,7 +83,7 @@ if st.button("Show Confusion Matrix"):
     ax.set_ylabel("Actual")
     st.pyplot(fig)
 
-# Prediction Section
+
 st.subheader("🔮 Predict Customer Cluster")
 
 label_names = {
