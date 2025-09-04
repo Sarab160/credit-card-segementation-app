@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
-
+from sklearn.tree import DecisionTreeClassifier
 df=pd.read_csv("CC GENERAL.csv")
 
 x=df.iloc[:,1:]
@@ -45,14 +45,14 @@ y=x["spender"]
 X=ss.fit_transform(x_k)
 
 x_train,x_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
-knc=KNeighborsClassifier(n_neighbors=10)
+knc=DecisionTreeClassifier(max_depth=10)
 knc.fit(x_train,y_train)
 
 print("Test Score",knc.score(x_test,y_test))
 print("Train score",knc.score(x_train,y_train))
-print("Precision Score",precision_score(y_test,knc.predict(x_test)))
-print("Recall Score",recall_score(y_test,knc.predict(x_test)))
-print("F1 score",f1_score(y_test,knc.predict(x_test)))
+print("Precision Score",precision_score(y_test,knc.predict(x_test),pos_label=-1))
+print("Recall Score",recall_score(y_test,knc.predict(x_test),pos_label=-1))
+print("F1 score",f1_score(y_test,knc.predict(x_test),pos_label=-1))
 
 con=confusion_matrix(y_test,knc.predict(x_test))
 sns.heatmap(data=con,annot=True)
